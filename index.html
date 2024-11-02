@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADHDに対する意識調査</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 24px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2c3e50;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        p {
+            margin: 10px 0;
+        }
+        .form-container {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .question {
+            margin-bottom: 15px;
+            padding: 12px;
+            border-left: 4px solid #3498db;
+            background: linear-gradient(90deg, #f9fbfd, #eef5fa);
+            border-radius: 4px;
+        }
+        .consent {
+            margin-top: 20px;
+            padding: 10px;
+            border-left: 4px solid #3498db;
+            background: #eef5fa;
+            border-radius: 4px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            color: #34495e;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #3498db;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #2980b9;
+        }
+        .submit-btn:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+    </style>
+    <script>
+        function checkConsent() {
+            const questions = document.querySelectorAll('.question input[type="radio"]');
+            const groups = Array.from(new Set(Array.from(questions).map(q => q.name)));
+            let allAnswered = groups.every(groupName => {
+                const group = document.querySelectorAll(`input[name="${groupName}"]`);
+                return Array.from(group).some(input => input.checked);
+            });
+            document.getElementById("submitBtn").disabled = !allAnswered;
+        }
+    </script>
+</head>
+<body onload="checkConsent()">
+
+    <h1>ADHDに対する意識調査</h1>
+    
+    <h2>調査目的</h2>
+    <p>本調査は、学生のADHD（注意欠陥・多動性障害）に対する理解・意識を把握し、啓発活動や支援の改善に役立てるためのデータを収集することを目的としています。</p>
+
+    <h2>調査方法</h2>
+    <p>WEBアンケートによる量的調査で実施されます。回答は匿名で行われ、統計データとしてのみ使用されます。</p>
+
+    <h2>調査対象</h2>
+    <p>対象: 学生</p>
+
+    <h2>担当者・連絡先</h2>
+    <p>担当者: 筑波大学　知識情報・図書館学類　尾上 雄太<br>連絡先: s2311312@klis.tsukuba.ac.jp</p>
+
+    <h2>倫理的配慮とデータの取り扱い</h2>
+    <p>ご提供いただいた回答データは統計的な解析にのみ使用され、個人が特定される形で公表されることはありません。また、データは調査終了後、一定期間保管した後、適切に処分いたします。</p>
+
+    <h2>インフォームド・コンセント</h2>
+    <p>この調査は任意参加です。ご自身の判断で参加いただき、いつでも途中で中止することが可能です。回答いただいた時点で、上記の目的、方法、データの取り扱いについてご理解いただき、同意いただいたものとみなします。</p>
+
+    <div class="form-container">
+        <h2>調査項目</h2>
+        <form action="submit-survey.php" method="POST" oninput="checkConsent()">
+            
+            <div class="question">
+                <label>ADHDという言葉を聞いたことがありますか？</label>
+                <input type="radio" name="q1" value="はい"> はい
+                <input type="radio" name="q1" value="いいえ"> いいえ
+            </div>
+
+            <div class="question">
+                <label>ADHDに関する知識レベルはどの程度ですか？</label>
+                <input type="radio" name="q2" value="1"> 1: 全く知らない
+                <input type="radio" name="q2" value="2"> 2
+                <input type="radio" name="q2" value="3"> 3
+                <input type="radio" name="q2" value="4"> 4
+                <input type="radio" name="q2" value="5"> 5: 非常に詳しい
+            </div>
+
+            <div class="question">
+                <label>ADHDを持つ人についてどのような印象を持っていますか？</label>
+                <input type="radio" name="q3" value="1"> 1: 非常に否定的
+                <input type="radio" name="q3" value="2"> 2
+                <input type="radio" name="q3" value="3"> 3
+                <input type="radio" name="q3" value="4"> 4
+                <input type="radio" name="q3" value="5"> 5: 非常に肯定的
+            </div>
+
+            <div class="question">
+                <label>学校や職場でのADHD支援は充実していると思いますか？</label>
+                <input type="radio" name="q4" value="1"> 1: 全く思わない
+                <input type="radio" name="q4" value="2"> 2
+                <input type="radio" name="q4" value="3"> 3
+                <input type="radio" name="q4" value="4"> 4
+                <input type="radio" name="q4" value="5"> 5: 非常に思う
+            </div>
+
+            <div class="question">
+                <label>ADHDに関する啓発活動や教育がもっと増えるべきだと思いますか？</label>
+                <input type="radio" name="q5" value="1"> 1: 全く思わない
+                <input type="radio" name="q5" value="2"> 2
+                <input type="radio" name="q5" value="3"> 3
+                <input type="radio" name="q5" value="4"> 4
+                <input type="radio" name="q5" value="5"> 5: 非常に思う
+            </div>
+
+            <div class="consent">
+                <p>この調査は任意参加であり、回答をもって同意いただいたものとみなします。個人情報の保護と倫理的配慮の下、データは適切に処理されます。</p>
+            </div>
+            
+            <button type="submit" id="submitBtn" class="submit-btn" disabled>回答を送信する</button>
+        </form>
+    </div>
+</body>
+</html>
